@@ -1,0 +1,477 @@
+1
+#include<iostream>
+using namespace std;
+
+class Vehicle {
+public:
+	Vehicle(){
+	cout << "This is a Vehicle\n";
+	}
+};
+
+class Car : public Vehicle {
+};
+
+int main(){ 
+	Car obj;
+	return 0;
+}
+
+
+
+2
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    void sound() {
+        cout << "Animal makes a sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void bark() {
+        cout << "Dog barks" << endl;
+    }
+};
+
+int main() {
+    Dog myDog;
+    myDog.sound();
+    myDog.bark();
+    return 0;
+}
+
+
+
+
+// Single Inheritance
+3
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    void draw() {
+        cout << "Drawing shape..." << endl;
+    }
+};
+
+class Circle : public Shape {
+public:
+    void drawCircle() {
+        cout << "Drawing circle..." << endl;
+    }
+};
+
+int main() {
+    Circle circle;
+    circle.draw();
+    circle.drawCircle(); 
+    return 0;
+}
+
+
+
+//Multiple Inheritance Example
+4
+#include <iostream>
+using namespace std;
+
+class Base1 {
+public:
+    void displayBase1() {
+        cout << "Base1 class method" << endl;
+    }
+};
+
+class Base2 {
+public:
+    void displayBase2() {
+        cout << "Base2 class method" << endl;
+    }
+};
+
+class Derived : public Base1, public Base2 {
+public:
+    void displayDerived() {
+        cout << "Derived class method" << endl;
+    }
+};
+
+int main() {
+    Derived derived;
+    derived.displayBase1(); 
+    derived.displayBase2(); 
+    derived.displayDerived(); 
+    return 0;
+}
+
+
+Multilevel Inheritance Example
+4-2
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    void sound() {
+        cout << "Animal sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void bark() {
+        cout << "Dog barks" << endl;
+    }
+};
+
+class GermanShepherd : public Dog {
+public:
+    void specialAbility() {
+        cout << "German Shepherd has special abilities" << endl;
+    }
+};
+
+int main() {
+    GermanShepherd gs;
+    gs.sound(); 
+    gs.bark(); 
+    gs.specialAbility(); 
+    return 0;
+}
+
+
+
+//Hierarchical Inheritance Example
+5
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    void sound() {
+        cout << "Animal sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void bark() {
+        cout << "Dog barks" << endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void meow() {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main() {
+    Dog dog;
+    Cat cat;
+    dog.sound(); 
+    dog.bark(); 
+    cat.sound(); 
+    cat.meow(); 
+    return 0;
+}
+
+
+//function overriding in inheritance 
+6
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void makeSound() {
+        cout << "Animal makes a sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Dog barks" << endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void makeSound() override {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main() {
+    Animal* animalPtr;
+    Dog dog;
+    Cat cat;
+
+    animalPtr = &dog;
+    animalPtr->makeSound(); 
+
+    // Pointing to a Cat object
+    animalPtr = &cat;
+    animalPtr->makeSound(); // Calls Cat's makeSound()
+
+    return 0;
+}
+
+
+====================
+
+Ex1: tot 平均
+
+#include <iostream>
+using namespace std;
+
+class stud {
+protected:
+    int roll, m1, m2;
+
+public:
+    void get()
+    {
+        cout << "Enter the Roll No.: "; cin >> roll;
+        cout << "Enter the two highest marks: "; cin >> m1 >> m2;
+    }
+};
+class extracurriculam {
+protected:
+    int xm;
+
+public:
+    void getsm()
+    {
+        cout << "\nEnter the mark for Extra Curriculam Activities: "; cin >> xm;
+    }
+};
+class output : public stud, public extracurriculam {
+    int tot, avg;
+
+public:
+    void display()
+    {
+        tot = (m1 + m2 + xm);
+        avg = tot / 3;
+        cout << "\n\n\tRoll No    : " << roll << "\n\tTotal      : " << tot;
+        cout << "\n\tAverage    : " << avg;
+    }
+};
+int main()
+{
+    output O;
+    O.get();
+    O.getsm();
+    O.display();
+}
+
+
+
+//============================================
+
+Ex2: 多to單一 性別
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+class member {
+    char gender[10];
+    int age;
+
+public:
+    void get()
+    {
+        cout << "Age: "; cin >> age;
+        cout << "Gender: "; cin >> gender;
+    }
+    void disp()
+    {
+        cout << "Age: " << age << endl;
+        cout << "Gender: " << gender << endl;
+    }
+};
+class stud : public member {
+    char level[20];
+
+public:
+    void getdata()
+    {
+        member::get();
+        cout << "Class: "; cin >> level;
+    }
+    void disp2()
+    {
+        member::disp();
+        cout << "Level: " << level << endl;
+    }
+};
+class staff : public member {
+    float salary;
+
+public:
+    void getdata()
+    {
+        member::get();
+        cout << "Salary: Rs."; cin >> salary;
+    }
+    void disp3()
+    {
+        member::disp();
+        cout << "Salary: Rs." << salary << endl;
+    }
+};
+int main()
+{
+    member M;
+    staff S;
+    stud s;
+    cout << "Student" << endl;
+    cout << "Enter data" << endl;
+    s.getdata();
+    cout << endl
+    << "Displaying data" << endl;
+    s.disp();
+    cout << endl
+    << "Staff Data" << endl;
+    cout << "Enter data" << endl;
+    S.getdata();
+    cout << endl
+    << "Displaying data" << endl;
+    S.disp();
+}
+
+
+
+//===========================================
+
+Ex3: 
+
+
+#include <iostream>
+using namespace std;
+
+class base {
+public:
+    void display1()
+    {
+        cout << "\nBase class content.";
+    }
+};
+class derived : public base {
+public:
+    void display2()
+    {
+        cout << "1st derived class content.";
+    }
+};
+
+class derived2 : public derived {
+    void display3()
+    {
+        cout << "\n2nd Derived class content.";
+    }
+};
+
+int main()
+{
+    derived2 D;
+    //D.display3();
+    D.display2();
+    D.display1();
+}
+
+
+//===========================================
+
+Ex4: 
+
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual void draw() {
+        cout << "Drawing a shape" << endl;
+    }
+};
+
+class Circle : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing a circle" << endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    // Overridden function
+    void draw() override {
+        cout << "Drawing a rectangle" << endl;
+    }
+};
+
+int main() {
+    Shape* shapePtr;
+    Circle circle;
+    Rectangle rectangle;
+
+    shapePtr = &circle;
+    shapePtr->draw(); 
+
+    shapePtr = &rectangle;
+    shapePtr->draw(); 
+
+    return 0;
+}
+
+
+//===========================================
+
+Ex5: 
+
+#include <iostream>
+using namespace std;
+
+class Vehicle {
+public:
+    virtual void start() {
+        cout << "Vehicle starts" << endl;
+    }
+};
+
+class Car : public Vehicle {
+public:
+    void start() override {
+        cout << "Car starts with ignition" << endl;
+    }
+};
+
+class Bike : public Vehicle {
+public:
+    void start() override {
+        cout << "Bike starts with kick" << endl;
+    }
+};
+
+int main() {
+    Vehicle* vehiclePtr;
+    Car car;
+    Bike bike;
+
+    vehiclePtr = &car;
+    vehiclePtr->start(); 
+
+    vehiclePtr = &bike;
+    vehiclePtr->start(); 
+
+    return 0;
+}
